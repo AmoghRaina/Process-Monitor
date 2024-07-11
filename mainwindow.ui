@@ -26,6 +26,13 @@
       <height>531</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Yu Gothic UI Semibold</family>
+      <pointsize>9</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(30, 30, 30);</string>
     </property>
@@ -34,6 +41,22 @@
       <string notr="true">1</string>
      </property>
     </column>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>181</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(25, 25, 25);</string>
+    </property>
+    <property name="placeholderText">
+     <string>Search</string>
+    </property>
    </widget>
   </widget>
  </widget>

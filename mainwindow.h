@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <windows.h>
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -16,10 +16,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    int processid = 0;
+    DWORD64 processid = 0;
 
 private:
     Ui::MainWindow *ui;
     void populateWidgets();
+    void linesearch();
 };
 #endif // MAINWINDOW_H
