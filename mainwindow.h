@@ -22,5 +22,7 @@ private:
     Ui::MainWindow *ui;
     void populateWidgets();
     void linesearch();
+    void showContextMenu();
+    void info();
 };
 #endif // MAINWINDOW_H
