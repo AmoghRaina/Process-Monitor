@@ -43,6 +43,16 @@ The Process Manager Application is a powerful tool designed to provide comprehen
 -   **Qt**: Used for building the graphical user interface.
 -   **Windows API**: Utilized for accessing process information and performing actions such as terminating processes and opening file locations.
 -   **C++**: The core programming language for implementing the application's functionality.
+## Future additions
+
+1.  **Driver communication** (currently using system calls to retrieve process information) 
+2.  **Cpu utilization** 
+3. **Usage-Graph representation** 
+4. **ProcessManipulators** 
+5. **Inbuilt process offset manipulation** 
+6. **Unwanted processes finder** 
+
+
 
 ## How to Use
 
