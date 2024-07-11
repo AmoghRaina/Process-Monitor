@@ -24,5 +24,7 @@ private:
     void linesearch();
     void showContextMenu();
     void info();
+    QMenuBar *menuBar;
+    void hideProtectedProcess();
 };
 #endif // MAINWINDOW_H

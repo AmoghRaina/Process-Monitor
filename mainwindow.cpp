@@ -10,14 +10,26 @@
 #include <QTimer>
 #include <ShlObj.h>
 #include "dialog.h"
+#include <QWidget>
+#include <QMenuBar>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    menuBar = new QMenuBar(this);
+    setMenuBar(menuBar);
+    QMenu *viewMenu = menuBar->addMenu("&View");
+
+    QAction *hideProtectedAction = new QAction(("Hide Protected Process"), this);
+    connect(hideProtectedAction, &QAction::triggered, this, &MainWindow::hideProtectedProcess);
+    viewMenu->addAction(hideProtectedAction);
+    viewMenu->setStyleSheet("background-color: rgb(240, 240, 240); color: rgb(51, 51, 51);");
+
 
     QVBoxLayout *mainLayout = new QVBoxLayout(ui->centralwidget);
-    mainLayout->addSpacing(60);
+    mainLayout->addSpacing(25);
     mainLayout->addWidget(ui->treeWidget);
 
     populateWidgets();
@@ -101,6 +113,7 @@ void MainWindow::populateWidgets() {
     // for setting column headers
     ui->treeWidget->setHeaderLabels({"Process Name", "PID","Architecture","Status","Memory"});
     ui->treeWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    ui->treeWidget->resizeColumnToContents(0);
 
 
 }
@@ -264,7 +277,29 @@ void MainWindow::showContextMenu() {
     contextMenu.exec(QCursor::pos());
 }
 
-void MainWindow::info(){
+void MainWindow::info() {
     Dialog dia;
+    dia.setWindowTitle("Information");
+    dia.setWindowIcon(QIcon(":/resources/rsimg/file.ico"));
+
+
     dia.exec();
 }
+
+void MainWindow::hideProtectedProcess() {
+    for (int i = 0; i < ui->treeWidget->topLevelItemCount(); i++) {
+        QTreeWidgetItem *item = ui->treeWidget->topLevelItem(i);
+
+            QString status = item->text(3);
+            QString memory = item->text(4);
+            if (status == "-" && memory == "Undefined") {
+
+                item->setHidden(true);
+
+
+
+        }
+    }
+}
+
+

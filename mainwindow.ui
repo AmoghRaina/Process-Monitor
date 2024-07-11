@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(5, 5, 5);</string>
+   <string notr="true">background-color: rgb(15 ,15, 15);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTreeWidget" name="treeWidget">
@@ -46,7 +46,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>40</y>
+      <y>10</y>
       <width>181</width>
       <height>21</height>
      </rect>
@@ -61,10 +61,10 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>40</y>
-      <width>41</width>
-      <height>21</height>
+      <x>290</x>
+      <y>5</y>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -78,7 +78,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>35</y>
+      <y>5</y>
       <width>83</width>
       <height>29</height>
      </rect>
