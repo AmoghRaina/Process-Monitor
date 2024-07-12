@@ -56,7 +56,7 @@ The Process Manager Application is a powerful tool designed to provide comprehen
 
 ## How to Use
 
-1.  **Clone the Repository**: `git clone https://github.com/yourusername/ProcessManagerApplication.git`
+1.  **Clone the Repository**: 
 2.  **Build the Application**: Open the project in Qt 6.0 or higher and build the project.
 3.  **Run the Application**: Execute the built application to start managing processes on your Windows system.
 
