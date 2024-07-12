@@ -65,7 +65,7 @@ void MainWindow::populateWidgets() {
             item->setText(0, QString::fromWCharArray(processEntry.szExeFile));
 
 
-            // for setting icons
+            // for setting icons(Currently broken)
             QIcon icon = iconProvider.icon(QFileInfo(filePath));
             item->setIcon(0, icon);
 
@@ -74,6 +74,7 @@ void MainWindow::populateWidgets() {
 
             HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processid);
 
+            // Finding process architecture
 
             BOOL isWow64 = FALSE;
             IsWow64Process(processHandle, &isWow64);
@@ -85,6 +86,7 @@ void MainWindow::populateWidgets() {
 
             }
 
+            // current status of the process (note:since im using system calls some process cannot be accessed as they are protected)
 
             DWORD exitCode = 0;
             if (GetExitCodeProcess(processHandle, &exitCode)&& exitCode == STILL_ACTIVE) {
@@ -93,10 +95,10 @@ void MainWindow::populateWidgets() {
                 else {
                     item->setText(3, QString("-"));
                 }
+            // memory usage of processes
 
             PROCESS_MEMORY_COUNTERS_EX pmc;
             if (GetProcessMemoryInfo(processHandle, (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc))) {
-                // Display memory usage (working set size)
                 QString memoryUsage = QString::number(pmc.WorkingSetSize / (1024 * 1024)) + " MB";
                 item->setText(4, memoryUsage);
             } else {
@@ -110,7 +112,6 @@ void MainWindow::populateWidgets() {
 
     CloseHandle(hsnap);
 
-    // for setting column headers
     ui->treeWidget->setHeaderLabels({"Process Name", "PID","Architecture","Status","Memory"});
     ui->treeWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     ui->treeWidget->resizeColumnToContents(0);
@@ -137,7 +138,8 @@ void MainWindow::linesearch(){
 
 
                 item->setText(0, QString::fromWCharArray(processEntry.szExeFile));
-                // for setting icons
+
+                // for setting icons (Currently broken)
                 QFileIconProvider iconProvider;
                 QIcon icon = iconProvider.icon(QFileInfo(filePath));
                 item->setIcon(0, icon);
@@ -148,7 +150,7 @@ void MainWindow::linesearch(){
                 item->setText(1, QString::number(processEntry.th32ProcessID));
 
                 HANDLE processHandle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ, FALSE, processid);
-
+                // Finding process architecture
                 BOOL isWow64 = FALSE;
                 IsWow64Process(processHandle, &isWow64);
                 if(isWow64){
@@ -159,7 +161,7 @@ void MainWindow::linesearch(){
 
                 }
 
-
+                // current status of the process (note:since im using system calls some process cannot be accessed as they are protected)
                 DWORD exitCode = 0;
                 if (GetExitCodeProcess(processHandle, &exitCode)&& exitCode == STILL_ACTIVE) {
                     item->setText(3, QString("Running"));
@@ -168,10 +170,9 @@ void MainWindow::linesearch(){
                     item->setText(3, QString("-"));
                 }
 
-
+                // memory usage of processes
                 PROCESS_MEMORY_COUNTERS_EX pmc;
                 if (GetProcessMemoryInfo(processHandle, (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc))) {
-                    // Display memory usage (working set size)
                     QString memoryUsage = QString::number(pmc.WorkingSetSize / (1024 * 1024)) + " MB";
                     item->setText(4, memoryUsage);
                 } else {
@@ -218,7 +219,7 @@ void MainWindow::showContextMenu() {
         if(processh){
             if(TerminateProcess(processh,0)){
                 QMessageBox::information(this, "Success", "Process terminated successfully.");
-                    linesearch(); // Execute your function or method
+                    linesearch();
 
             }
             else{
